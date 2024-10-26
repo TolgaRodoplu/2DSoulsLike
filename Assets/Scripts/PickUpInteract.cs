@@ -27,7 +27,7 @@ public class PickUpInteract : Interactable, IDataPersistance
         
     }
 
-    public void LoadData(GameData data)
+    public void LoadData(ref GameData data)
     {
         data.pickedUpItems.TryGetValue(id, out pickedUp);
 

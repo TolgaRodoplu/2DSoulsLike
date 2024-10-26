@@ -6830,6 +6830,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1857794782485601573, guid: 2d9e8017b8f15364788db0ca5fbaeff7, type: 3}
+      propertyPath: isEnterance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4892749972658297933, guid: 2d9e8017b8f15364788db0ca5fbaeff7, type: 3}
       propertyPath: m_Name
       value: ScaneTransitionTrigger

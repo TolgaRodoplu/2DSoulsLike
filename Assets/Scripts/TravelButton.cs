@@ -9,15 +9,21 @@ public class TravelButton : MonoBehaviour, IDataPersistance
     [HideInInspector] public string bonfireName;
     [HideInInspector] public int scane;
     [HideInInspector] public Vector3 position;
+    bool isClicked;
 
-    public void LoadData(GameData data)
+    public void LoadData(ref GameData data)
     {
         
     }
 
     public void SaveData(ref GameData data)
     {
-       
+        if (this.isClicked) 
+        {
+            data.lastBonfire = this.bonfireID;
+            isClicked = false;
+        }
+        
     }
 
     public void TravelButtonInit(string bonfireID, string bonfireName, int scane, Vector3 position)
@@ -34,11 +40,7 @@ public class TravelButton : MonoBehaviour, IDataPersistance
 
     public void Travel()
     {
-        Debug.Log("Travelled");
-        StaticEnterData.travelType = TravelType.Teleport;
-        GameData data = DataPersistenceManager.instance.GetData();
-        data.lastBonfire = this.bonfireID;
-        data.playerPos = this.position;
-        SceneManager.LoadSceneAsync(this.scane);
+        DataPersistenceManager.instance.GetData().lastBonfire = this.bonfireID; 
+        EventSystem.instance.LoadScane(this.scane);
     }
 }

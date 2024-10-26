@@ -19,7 +19,6 @@ public class UI : MonoBehaviour
     [SerializeField] GameObject deathScreen;
     float gameSavedTimer = 2f;
 
-
     
     private void Start()
     {
@@ -30,7 +29,7 @@ public class UI : MonoBehaviour
         EventSystem.instance.openTeleportMenu += OpenTeleportMenu;
         EventSystem.instance.editHealthUI += EditHealthUI;
         EventSystem.instance.death += ActivateDeath;
-
+        EventSystem.instance.EditHealth(0);
     }
 
     void ActivateDeath()
@@ -43,13 +42,12 @@ public class UI : MonoBehaviour
         yield return new WaitForSeconds(3f);
         deathScreen.SetActive(true);
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadSceneAsync(DataPersistenceManager.instance.GetData().currentScene);
+        EventSystem.instance.LoadScane(DataPersistenceManager.instance.GetData().litBonfires[DataPersistenceManager.instance.GetData().lastBonfire]);
     }
 
 
     void EditHealthUI(object sender, float leftHealth)
     {
-        Debug.Log(leftHealth);
         healthBar.fillAmount = leftHealth;
     }
 
@@ -65,7 +63,6 @@ public class UI : MonoBehaviour
 
     void GameSaved()
     {
-        StopCoroutine(GameSavedRoutine());
         StartCoroutine(GameSavedRoutine());
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Bonfire : Interactable, IDataPersistance
 {
+
     [SerializeField] private string id;
 
     private int scaneID;
@@ -28,22 +29,23 @@ public class Bonfire : Interactable, IDataPersistance
     public override void Interact(Transform interactor)
     {
         EventSystem.instance.RestorePlayer();
-
-        if(!isLit)
+        DataPersistenceManager.instance.GetData().lastBonfire = this.id;
+        DataPersistenceManager.instance.GetData().onBonfire = true;
+        if (!isLit)
         {
             fireObj.SetActive(true);
             isLit = true;
             type = InteractionType.Use;
-            DataPersistenceManager.instance.SaveGame();
         }
         else
         {
-            DataPersistenceManager.instance.SaveGame();
             EventSystem.instance.OpenTeleportUI();
         }
+
+        DataPersistenceManager.instance.SaveGame();
     }
 
-    public void LoadData(GameData data)
+    public void LoadData(ref GameData data)
     {
         if(data.litBonfires.ContainsKey(id))
         {
@@ -61,7 +63,7 @@ public class Bonfire : Interactable, IDataPersistance
             data.litBonfires.Add(id, scaneID);
             data.litBonfireLocations.Add(id, transform.position);
             data.litBonfireNames.Add(id, objectName);
-            data.lastBonfire = this.id;
         }
+
     }
 }

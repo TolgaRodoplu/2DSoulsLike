@@ -20,8 +20,6 @@ public class MainMenu : MonoBehaviour, IDataPersistance
     {
         DataPersistenceManager.instance.NewGame();
 
-        StaticEnterData.travelType = TravelType.Exit;
-
         SceneManager.LoadSceneAsync("Forest");
     }
 
@@ -42,9 +40,9 @@ public class MainMenu : MonoBehaviour, IDataPersistance
         exitButton.interactable = false;
     }
 
-    public void LoadData(GameData data)
+    public void LoadData(ref GameData data)
     {
-        scaneToContinue = data.currentScene;
+        scaneToContinue = data.litBonfires[data.lastBonfire];
     }
 
     public void SaveData(ref GameData data)

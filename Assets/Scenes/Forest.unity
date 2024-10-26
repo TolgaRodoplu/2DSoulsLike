@@ -3070,6 +3070,10 @@ PrefabInstance:
       propertyPath: type
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1857794782485601573, guid: 2d9e8017b8f15364788db0ca5fbaeff7, type: 3}
+      propertyPath: isEnterance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4892749972658297933, guid: 2d9e8017b8f15364788db0ca5fbaeff7, type: 3}
       propertyPath: m_Name
       value: ScaneTransitionTrigger (1)
@@ -3118,8 +3122,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6438408522025780962, guid: 2d9e8017b8f15364788db0ca5fbaeff7, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -15771,6 +15774,10 @@ PrefabInstance:
     - target: {fileID: 1857794782485601573, guid: 2d9e8017b8f15364788db0ca5fbaeff7, type: 3}
       propertyPath: type
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1857794782485601573, guid: 2d9e8017b8f15364788db0ca5fbaeff7, type: 3}
+      propertyPath: isEnterance
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4892749972658297933, guid: 2d9e8017b8f15364788db0ca5fbaeff7, type: 3}
       propertyPath: m_Name

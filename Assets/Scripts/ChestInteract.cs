@@ -15,7 +15,6 @@ public class ChestInteract : Interactable
 
     public override void Interact(Transform interactor)
     {
-        Debug.Log("Open");
         isOpen = true;
         anim.SetBool("IsOpened", isOpen);
     }

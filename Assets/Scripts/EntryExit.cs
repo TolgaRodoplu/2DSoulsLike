@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class EntryExit : MonoBehaviour
 {
-    public TravelType type;
+    
 }

@@ -53,13 +53,12 @@ public class PlayerStats : MonoBehaviour, IDataPersistance
         playerInventory[index] = newItem;
     }
 
-    public void LoadData(GameData data)
+    public void LoadData(ref GameData data)
     {
         Item[] folderItems = Resources.LoadAll<Item>("ScriptableObjects/Items");
 
         playerHealth = data.playerHealth;   
 
-        Debug.Log(playerHealth);
 
         lastBonfire = data.lastBonfire;
 
@@ -78,7 +77,6 @@ public class PlayerStats : MonoBehaviour, IDataPersistance
         }
 
 
-        Debug.Log(playerHealth / playerHealthTotal);
 
         
 

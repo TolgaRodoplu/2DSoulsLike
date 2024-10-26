@@ -215,41 +215,48 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     }
 
     
-    public void LoadData(GameData data)
+    public void LoadData(ref GameData data)
     {
+
         ScaneTrigger[] entryExits = FindObjectsOfType<ScaneTrigger>();
 
-        if (StaticEnterData.travelType == TravelType.Teleport || StaticEnterData.travelType == TravelType.Nothing)
-        {
-            transform.position = data.playerPos;
-        }
+        Vector3 position = Vector3.zero;
 
-        else
+        Debug.Log(data.didWalk);
+        if (data.didWalk == true)
         {
-            if (entryExits != null)
+            
+            foreach (ScaneTrigger trigger in entryExits)
             {
-                foreach (ScaneTrigger trigger in entryExits)
+                if(trigger.isEnterance != data.isEnterence)
                 {
-                    if ((trigger.type == TravelType.Enter && StaticEnterData.travelType == TravelType.Exit) ||
-                        trigger.type == TravelType.Exit && StaticEnterData.travelType == TravelType.Enter)
-                    {
-                        transform.position = trigger.transform.position;
-
-                        if (trigger.type == TravelType.Exit)
-                        {
-                            Flip();
-                        }
-                        break;
-                    }
+                    transform.position = trigger.transform.position;
+                    break;
                 }
             }
-        }
 
-        StaticEnterData.travelType = TravelType.Nothing;
+
+            data.didWalk = false;
+        }
+        else
+        {
+            Debug.Log(data.litBonfireLocations[data.lastBonfire]);
+            transform.position = data.litBonfireLocations[data.lastBonfire];
+        }
+        
+        
+
+        
+
+        
+
     }
 
     public void SaveData(ref GameData data)
     {
-        
+        if (isDead)
+        {
+            data.playerHealth = 10;
+        }
     }
 }

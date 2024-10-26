@@ -8,11 +8,15 @@ public class GameData
 
     public float playerHealth;
 
-    public int currentScene;
+    public bool onBonfire;
+
+    public bool didWalk;
 
     public Vector3 playerPos;
 
     public float healthBarFillAmounth;
+
+    public bool isEnterence;
 
     public SerializableDictionary<string, string> litBonfireNames;
 
@@ -28,8 +32,10 @@ public class GameData
 
     public GameData() 
     {
+        isEnterence = false;
         playerHealth = 100;
-        currentScene = 1;
+        onBonfire = false;
+        didWalk = true;
         playerPos = new Vector3(-2.5f, -0.7f, 0);
         litBonfireLocations = new SerializableDictionary<string, Vector3>();
         litBonfireNames = new SerializableDictionary<string, string>();

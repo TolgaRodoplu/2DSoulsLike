@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Windows;
 
 public class EventSystem : MonoBehaviour
@@ -92,5 +93,11 @@ public class EventSystem : MonoBehaviour
     {
         SetPlayer(false);
         death?.Invoke();
+    }
+
+    public void LoadScane(int scane)
+    {
+        Debug.Log(scane);
+        SceneManager.LoadSceneAsync(scane);
     }
 }

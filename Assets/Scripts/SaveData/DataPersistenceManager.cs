@@ -30,8 +30,6 @@ public class DataPersistenceManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         this.fileDataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
-
-        StaticEnterData.travelType = TravelType.Nothing;
     }
 
     private void OnEnable()
@@ -67,34 +65,27 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        GetBonfire();
+        gameData.didWalk = false;
+        gameData.onBonfire = true;
+        
     }
 
-    private void GetBonfire()
-    {
-        if (gameData.lastBonfire != "")
-        {
-            gameData.litBonfireLocations.TryGetValue(gameData.lastBonfire, out gameData.playerPos);
-            gameData.litBonfires.TryGetValue(gameData.lastBonfire, out gameData.currentScene);
-        }
-        SaveGame();
-
-    }
+    
 
 
     
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("on scane loaded");
         this.dataPersistanceObjects = FindAllDataPersistanceObjects();
         LoadGame();
     }
 
     public void OnSceneUnloaded(Scene scene)
     {
-        Debug.Log("on scane unloaded");
+        StopAllCoroutines();
         SaveGame();
+
     }
 
     public void NewGame()
@@ -104,7 +95,6 @@ public class DataPersistenceManager : MonoBehaviour
     }
     public void LoadGame()
     {
-        Debug.Log("Load Game Run");
         this.gameData = fileDataHandler.Load(); 
 
         if(this.gameData == null)
@@ -118,7 +108,7 @@ public class DataPersistenceManager : MonoBehaviour
 
         foreach(IDataPersistance data in dataPersistanceObjects)
         {
-            data.LoadData(gameData);
+            data.LoadData(ref gameData);
         }
 
 
@@ -126,7 +116,6 @@ public class DataPersistenceManager : MonoBehaviour
     }
     public void SaveGame()
     {
-        Debug.Log("save game run");
         if(this.gameData == null)
         {
             return;

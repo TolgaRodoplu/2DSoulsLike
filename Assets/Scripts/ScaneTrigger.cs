@@ -3,25 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ScaneTrigger : MonoBehaviour
+public class ScaneTrigger : MonoBehaviour, IDataPersistance
 {
-    public TravelType type;
+    public bool isEnterance;
+
+
+    bool didTrigger = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
+           
+
             int offset = 1;
 
-            if (type == TravelType.Enter)
+            if (isEnterance)
             {
                 offset = -1;
             }
 
-            StaticEnterData.travelType = type;
+            didTrigger = true;
 
 
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + offset);
+            EventSystem.instance.LoadScane(SceneManager.GetActiveScene().buildIndex + offset);
         }
     }
+
+    public void LoadData(ref GameData data)
+    {
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        if (didTrigger) 
+        {
+            data.didWalk = true;
+            data.isEnterence = this.isEnterance;
+        }
+
+        didTrigger = false;
+    }
 }
+

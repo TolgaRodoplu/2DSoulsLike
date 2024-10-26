@@ -42,7 +42,6 @@ public class InventoryManeger : MonoBehaviour
 
             if (itemInSlot == null) 
             {
-                Debug.Log("EmptySlotFound");
                 EventSystem.instance.ModifyInv(item, i);
                 SpawnNewItem(item, inventory[i]);
                 return;
@@ -53,7 +52,6 @@ public class InventoryManeger : MonoBehaviour
 
     public void SpawnNewItem(Item item, InventorySlot slot) 
     {
-        Debug.Log("Spawning New Item");
         GameObject newItem = Instantiate(inventoryItemPrefab, slot.transform);
         InventoryItem inventoryItem = newItem.GetComponent<InventoryItem>();
         inventoryItem.InitItem(item);
